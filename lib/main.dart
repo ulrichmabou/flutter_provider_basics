@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'flavor.dart';
 import 'counter.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(Provider<Flavor>.value(
+      value: Flavor.dev,
+      child: MyApp(),
+    ));
 
 class MyApp extends StatelessWidget {
   @override
@@ -27,10 +31,11 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final flavor = Provider.of<Flavor>(context);
     final counter = Provider.of<ValueNotifier<int>>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(flavor.toString()),
       ),
       body: Center(
         child: Column(
